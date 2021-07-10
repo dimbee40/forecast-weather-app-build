@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Forecast from "./Forecast";
 
 export default function WeatherSearch() {
   const [city, setCity] = useState("");
@@ -8,6 +9,7 @@ export default function WeatherSearch() {
   const [icon, setIcon] = useState("");
   const [humidity, setHumidity] = useState("");
   const [description, setDescription] = useState("");
+  const[coordinates, setCoordinates]= useState("");
 
   function handleResponse(response) {
     console.log(response);
@@ -17,6 +19,7 @@ export default function WeatherSearch() {
         °C
       </li>
     );
+    
     setDescription(
       <li>Description: {response.data.weather[0].description}</li>
     );
@@ -30,6 +33,8 @@ export default function WeatherSearch() {
         <img src={iconURL} alt={description} />{" "}
       </li>
     );
+
+    setCoordinates(response.data.coord);
   }
 
   function handleSubmit(event) {
@@ -55,7 +60,9 @@ export default function WeatherSearch() {
       <p>{humidity}</p>
       <p>{description}</p>
       <p>{icon}</p>
+      <p>{coordinates}</p>
       <p>
+      <Forecast coordinates={coordinates} />
         Coded by <a href="https://github.com/dimbee40/wk4-HW-DW">Deb</a>
       </p>
     </div>

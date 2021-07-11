@@ -1,7 +1,15 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Forecast(){
+export default function Forecast(props){
+
+    function handleResponse (response){console.log (response.data);};
+    let apiKey= "3ec119a7b4622feedeeba843b106eb0a";
+    let longitude= props.coordinates.lon;
+    let latitude= props.coordinates.lat;
+    let apiURL= `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+console.log (props);
+    axios.get(apiUrl).then(handleResponse);
     return(<div className="Forecast">Hello there
     <div className="row">
         <div className="col">
